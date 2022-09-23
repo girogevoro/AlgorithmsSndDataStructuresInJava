@@ -133,7 +133,7 @@ public class LinkedListImpl<T> implements LinkedList<T> {
     @Override
     public Iterator<T> iterator() {
         // TODO: 22.09.2022 Реализовать итератор для связного списка. 
-        throw new UnsupportedOperationException("Not implemented yet");
+      return new IteratorLinkedList(head);
     }
 
     @Override
@@ -155,5 +155,27 @@ public class LinkedListImpl<T> implements LinkedList<T> {
 
 
         return "[" + output + "]";
+    }
+
+    protected class IteratorLinkedList implements Iterator<T>{
+        Node<T> next;
+
+        public IteratorLinkedList(Node<T> head) {
+            this.next = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
+
+        @Override
+        public T next() {
+            if (next == null)
+                return null;
+           T value = next.value;
+            next = next.next;
+            return value;
+        }
     }
 }
